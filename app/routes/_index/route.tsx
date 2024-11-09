@@ -1,6 +1,6 @@
 import type { MetaFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import { fetchBooks } from "~/apiFunctions";
+import { Input } from "~/components/ui/input";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -18,7 +18,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
 	return (
 		<div>
-			<h1>Hello World</h1>
+			<Input type="text" placeholder="Search for a Star Wars book" />
 		</div>
 	);
 }
