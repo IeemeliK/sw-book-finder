@@ -31,6 +31,9 @@ export async function fetchBooks(userInput: string) {
 		return { totalItems: data.totalItems, bookData: books };
 	} catch (error) {
 		console.error(error);
-		throw new Response("Server error!", { status: 500 });
+		throw new Response("Server error!", {
+			status: 500,
+			statusText: "Internal server error",
+		});
 	}
 }
