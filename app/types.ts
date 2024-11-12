@@ -24,6 +24,17 @@ interface VolumeInfo {
 	canonicalVolumeLink: string;
 }
 
+interface SingleVolumeInfo extends VolumeInfo {
+	imageLinks: {
+		smallThumbnail: string;
+		thumbnail: string;
+		small: string;
+		medium: string;
+		large: string;
+		extraLarge: string;
+	};
+}
+
 interface Item {
 	id: string;
 	volumeInfo: VolumeInfo;
