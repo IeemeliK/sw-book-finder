@@ -1,5 +1,5 @@
 export async function fetchBooks(userInput: string) {
-	const baseUrl = "https://www.googleapis.com/books/v1/volumes";
+	const volumesUrl = "https://www.googleapis.com/books/v1/volumes";
 
 	const params = new URLSearchParams({
 		q: `Star Wars ${userInput}`,
@@ -8,16 +8,11 @@ export async function fetchBooks(userInput: string) {
 		fields: "totalItems,items/volumeInfo",
 	});
 
-	const url = new URL(baseUrl);
+	const url = new URL(volumesUrl);
 	url.search = params.toString();
 
 	try {
-		const res = await fetch(url, {
-			headers: {
-				"Accept-Encoding": "gzip",
-				"User-Agent": "sw-book-finder (gzip)",
-			},
-		});
+		const res = await fetch(url);
 		const data = await res.json();
 
 		console.log(data);
@@ -36,6 +31,6 @@ export async function fetchBooks(userInput: string) {
 		return { totalItems: data.totalItems, bookData: books };
 	} catch (error) {
 		console.error(error);
-		throw new Response("Something went wrong!", { status: 500 });
+		throw new Response("Server error!", { status: 500 });
 	}
 }

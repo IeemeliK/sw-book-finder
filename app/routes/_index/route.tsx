@@ -43,7 +43,7 @@ export default function Index() {
 				id="q"
 				name="q"
 				placeholder="Search for a Star Wars book"
-				className="max-w-3xl"
+				className="max-w-3xl text-center md:text-left"
 			/>
 			<Button className="hidden md:inline-flex" type="submit">
 				Search
