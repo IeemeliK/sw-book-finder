@@ -1,10 +1,6 @@
-import type {
-	MetaFunction,
-	LoaderFunctionArgs,
-	ActionFunctionArgs,
-} from "@remix-run/node";
+import type { MetaFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-import { fetchBooks } from "~/apiFunctions";
+import { getBooks } from "~/apiFunctions";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 
@@ -20,17 +16,16 @@ export async function loader({ request }: LoaderFunctionArgs) {
 	const q = url.searchParams.get("q");
 
 	if (!q) {
-		return { bookData: null };
+		return { books: null };
 	}
 
-	const books = await fetchBooks(q);
-	console.log(books);
+	const books = await getBooks(q);
 
-	return { bookData: books, q };
+	return { books, q };
 }
 
 export default function Index() {
-	const { bookData, q } = useLoaderData<typeof loader>();
+	const { books, q } = useLoaderData<typeof loader>();
 	return (
 		<Form
 			className="items-center flex space-x-2 mt-16 justify-center w-screen px-3"
