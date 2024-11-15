@@ -1,40 +1,22 @@
-# Welcome to Remix!
+This app was almost entirely rewritten and completed on the last day I had to return this partly because Google Books decided to stop working due to rate limits :) so it is entirely scuffed. But it is what it is.
 
-- 📖 [Remix docs](https://remix.run/docs)
+On the front page you can search for Star Wars related books and then click on the image or the title of any book to get more information on it.
 
-## Development
+You can also click on the Author names on both the front and /book/[id] pages to get more information on said author.
 
-Run the dev server:
+Trying the app:
 
-```shellscript
-npm run dev
-```
+you can run the command:
 
-## Deployment
 
-First, build your app for production:
+```npm run dev ```
 
-```sh
-npm run build
-```
 
-Then run the app in production mode:
+OR
+```npm run build```
 
-```sh
-npm start
-```
+and then: 
+```npm run start```
 
-Now you'll need to pick a host to deploy it to.
+To try the production build!
 
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.

@@ -1,9 +1,7 @@
 import type { MetaFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { Form, useLoaderData, useSearchParams } from "@remix-run/react";
+import { useLoaderData, useSearchParams, Link } from "@remix-run/react";
 import React from "react";
 import { getBooks } from "~/apiFunctions";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
 import {
 	Pagination,
 	PaginationContent,
@@ -13,6 +11,7 @@ import {
 	PaginationPrevious,
 } from "~/components/ui/pagination";
 import { PaginationData } from "~/types";
+import { SearchComponent } from "./search";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -75,26 +74,7 @@ export default function Index() {
 
 	return (
 		<>
-			<section className="flex flex-col mt-16 space-y-8 items-center w-screen">
-				<h1 className="font-bold text-3xl">Star Wars Book Finder</h1>
-				<Form
-					className="flex space-x-2 w-screen justify-center px-7"
-					id="search-form"
-					role="search"
-				>
-					<Input
-						type="search"
-						defaultValue={q || ""}
-						id="q"
-						name="q"
-						placeholder="Search by title, author or description"
-						className="max-w-3xl text-center md:text-left"
-					/>
-					<Button className="hidden md:inline-flex" type="submit">
-						Search
-					</Button>
-				</Form>
-			</section>
+			<SearchComponent q={q} />
 			<main className="flex flex-col mt-8 items-center w-screen pb-5">
 				{books.bookData ? (
 					<div className="bg-muted w-10/12 sm:max-w-fit grid justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 rounded-lg p-8">
@@ -103,26 +83,30 @@ export default function Index() {
 								key={book.key}
 								className="flex flex-col py-3 text-center hover:scale-110 transition ease-in items-center text-wrap w-52"
 							>
-								{book.thumbnail ? (
-									<img
-										src={book.thumbnail}
-										className="w-36 h-52 rounded object-fit mb-2"
-										draggable="false"
-									/>
-								) : (
-									<div className="w-36 h-52 text-center flex items-center rounded mb-2 bg-violet-400">
-										<i>No images available</i>
-									</div>
-								)}
-								<h4 className="font-bold max-w-40">{book.title}</h4>
+								<Link prefetch="intent" to={`/book/${book.key}`}>
+									{book.thumbnail ? (
+										<img
+											src={book.thumbnail}
+											className="w-36 h-52 rounded object-fit mb-2"
+											draggable="false"
+										/>
+									) : (
+										<div className="w-36 h-52 text-center flex items-center rounded mb-2 bg-violet-400">
+											<i>No images available</i>
+										</div>
+									)}
+									<h4 className="font-bold max-w-40">{book.title}</h4>
+								</Link>
 								{book.author_name && (
 									<p className="mt-1 text-sm text-muted-foreground max-w-40">
 										{`Author${book.author_name.length > 1 ? "s" : ""}: `}
 										{book.author_name.map((author, idx) => (
 											<React.Fragment key={`${author}${book.key}`}>
-												<span className="dark:hover:bg-primary-foreground hover:bg-stone-300 rounded">
-													{author}
-												</span>
+												<Link to={`/author/${book.author_key[idx]}`}>
+													<span className="dark:hover:bg-primary-foreground hover:bg-stone-300 rounded">
+														{author}
+													</span>
+												</Link>
 												{idx < book.author_name.length - 1 && ", "}
 											</React.Fragment>
 										))}
