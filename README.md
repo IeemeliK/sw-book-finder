@@ -20,3 +20,4 @@ and then:
 
 To try the production build!
 
+I've used AI in this project to generate some of the types and it helped me build the author and book endpoints last minute
