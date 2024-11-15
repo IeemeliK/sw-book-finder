@@ -6,9 +6,9 @@ You can also click on the Author names on both the front and /book/[id] pages to
 
 Trying the app:
 
-you can run the command:
+you can run the commands:
 
-
+```npm i```
 ```npm run dev ```
 
 
@@ -19,5 +19,5 @@ and then:
 ```npm run start```
 
 To try the production build!
-
+NOTE: I used pnpm to make the project but npm should work just as well
 I've used AI in this project to generate some of the types and it helped me build the author and book endpoints last minute
